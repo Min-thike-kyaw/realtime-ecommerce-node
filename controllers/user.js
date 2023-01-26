@@ -30,7 +30,7 @@ let login = async function (req, res, next) {
             userObj.token = Libby.genToken(userObj);
             Libby.mres(res, "Logged in successfully", userObj);
         } else {
-            next(new Error("Error does not match"));  
+            next(new Error("Password does not match"));  
         }
     }else next(new Error("User does'nt exist"));
 }

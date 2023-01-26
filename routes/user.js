@@ -8,6 +8,7 @@ router.get('/', async function (req, res, next) {
     let result = await User.find();
     res.send(result);
 })
+
 router.post('/add-role', [validator.validateBody(schema.UserSchema.addRole),UserController.addRole])
 router.post('/remove-role', [validator.validateBody(schema.UserSchema.removeRole),UserController.removeRole])
 

@@ -1,5 +1,6 @@
 const fs = require('fs');
 let saveFile = function (req, res, next) {
+    // next()
     
     let fileName = new Date().valueOf() + '_' + req.files.file.name;
     req.files.file.mv(`./uploads/${fileName}`);

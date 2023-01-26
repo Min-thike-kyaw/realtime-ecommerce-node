@@ -12,6 +12,8 @@ let show = async function (req, res, next) {
     Libby.mres(res, "Category Detail", result)
 }
 let store = async function(req, res, next) {
+    // console.log(req.body);
+    // res.send(req.body);
     let newModel = new Category(req.body);
     let result = await newModel.save();
     Libby.mres(res, "Category Saved", result);

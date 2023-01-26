@@ -1,5 +1,5 @@
 require('dotenv').config()
-
+const cors = require('cors');
 const express = require('express'),
      app = express(),
      { createServer } = require("http"),
@@ -24,6 +24,10 @@ app.use(bodyParser.json())
 app.use(fileUpload());
 
 mongoose.connect('mongodb://localhost:27017/emart');
+
+app.use(cors({
+    origin: '*'
+}));
 // const asyncRedis = require("async-redis");
 // const client = asyncRedis.createClient();
 
@@ -48,9 +52,12 @@ const ProductRouter = require('./routes/product');
 const RoleRouter = require('./routes/role');
 const { validateToken} = require('./utils/validator');
 const libby = require('./utils/libby');
-app.use('/categories', validateToken,CategoryRouter);
-app.use('/products',validateToken, ProductRouter);
+app.use('/categories', CategoryRouter);
+app.use('/products', ProductRouter);
 app.use('/api' ,ApiRouter);
+app.get('/api/me', [validateToken,async function (req, res, next) {
+    res.send(req.body.user);
+}])
 app.use('/users', UserRouter);
 app.use('/roles', RoleRouter);
 app.use('/val', function (req, res, next) {
