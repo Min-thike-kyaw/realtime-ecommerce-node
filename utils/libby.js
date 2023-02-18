@@ -7,6 +7,7 @@ let mres = (res, msg, result = {}) => {
 let getSocketToken = (socket, next) => {
  
     let token = socket.handshake.query.token;
+    console.log(token)
     if (token) {
         
         try {

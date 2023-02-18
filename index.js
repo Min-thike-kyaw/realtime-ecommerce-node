@@ -6,7 +6,11 @@ const express = require('express'),
      { Server } = require("socket.io")
 
      httpServer = createServer(app),
-     io = new Server(httpServer),
+     io = new Server(httpServer,  {
+        cors: {
+            origin: '*'
+        }
+      }),
 
 
      bodyParser = require('body-parser'),
@@ -89,6 +93,10 @@ io.of('/chat').use((socket, next) => {
 }).on("connection", function (socket) {
     chat.initialize(io, socket);
 })
+io.on("connection", function (socket) {
+    socket.on("getMessage", (arg) => {
+        console.log(arg)
+    })})
   
 app.use(router);
 httpServer.listen(process.env.PORT, () => {

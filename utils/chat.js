@@ -1,6 +1,9 @@
 const redis = require('./redis');
 const Message = require('../models/message');
 const Unread = require('../models/unread');
+const Product = require('../models/product');
+const Libby = require('../utils/libby')
+
 let liveUser = async (socketId, user) => {
     user['socketId'] = socketId;
     console.log(socketId, user);
